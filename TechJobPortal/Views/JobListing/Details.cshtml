@@ -1,0 +1,30 @@
+@model TechJobPortal.Models.JobListing
+
+@{
+    ViewData["Title"] = "Job Details";
+}
+
+<h2>@Model.title</h2>
+
+<div>
+    <p><strong>Company:</strong> @Model.companyName</p>
+    <p><strong>Location:</strong> @Model.location</p>
+    <p><strong>Job Type:</strong> @Model.type</p>
+    <p><strong>Posted on:</strong> @Model.postedDate.ToString("MMM dd, yyyy")</p>
+</div>
+
+<h3>Update Job Type</h3>
+<form asp-action="UpdateJobType" method="post">
+    <div class="form-group">
+        <label for="JobType">Select Job Type</label>
+        <select id="JobType" name="JobType" class="form-control">
+            @foreach (var jobType in ViewBag.JobTypes as List<TechJobPortal.Models.JobListing.jobType>)
+            {
+                <option value="@jobType" @(jobType == Model.type ? "selected" : "")>@jobType</option>
+            }
+        </select>
+    </div>
+    
+    <input type="hidden" name="id" value="@Model.id" />
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
