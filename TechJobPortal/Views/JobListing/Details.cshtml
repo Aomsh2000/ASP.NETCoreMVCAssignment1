@@ -17,14 +17,14 @@
 <form asp-action="UpdateJobType" method="post">
     <div class="form-group">
         <label for="JobType">Select Job Type</label>
-        <select id="JobType" name="JobType" class="form-control">
-            @foreach (var jobType in ViewBag.JobTypes as List<TechJobPortal.Models.JobListing.jobType>)
+        <select id="JobType" name="jobType" class="form-control">
+            @foreach (var jobType in Enum.GetValues(typeof(TechJobPortal.Models.JobListing.jobType)))
             {
-                <option value="@jobType" @(jobType == Model.type ? "selected" : "")>@jobType</option>
+                <option value="@jobType">
+                    @jobType
+                </option>
             }
         </select>
     </div>
     
-    <input type="hidden" name="id" value="@Model.id" />
-    <button type="submit" class="btn btn-primary">Update</button>
 </form>
